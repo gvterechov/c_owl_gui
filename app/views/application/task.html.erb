@@ -1,0 +1,282 @@
+<% title t('index.title') %>
+
+<div class="ui stackable menu">
+  <div class="header item">
+    ISWC Demo
+<!--    <div class="ui small image">-->
+<!--      <img src="<%#= asset_pack_path("media/images/logo.png") %>" style="">-->
+<!--    </div>-->
+  </div>
+
+  <!-- variant 1
+  <div class="item">
+    <button class="ui primary button"><i class="file outline icon"></i> New</button>
+  </div>
+  <div class="item">
+    <button class="ui primary button"><i class="play icon"></i> Run</button>
+  </div>
+  <div class="item">
+    <button class="ui primary button"><i class="share icon"></i> Share</button>
+  </div>
+  -->
+
+  <!-- variant 2
+  <div class="item">
+    <div class="ui buttons">
+      <button class="ui primary button"><i class="file outline icon"></i> New</button>
+      <button class="ui primary button"><i class="play icon"></i> Run</button>
+      <button class="ui primary button"><i class="share icon"></i> Share</button>
+    </div>
+  </div>
+  -->
+
+  <!-- variant 3 -->
+  <div class="item">
+    <div class="ui basic buttons">
+      <div class="ui button"><i class="file outline icon"></i> <%= t('new') %></div>
+      <div class="ui button"><i class="play icon"></i> <%= t('run') %></div>
+      <div class="ui button"><i class="share icon"></i> <%= t('share') %></div>
+    </div>
+  </div>
+
+  <!-- variant 1 -->
+  <div class="ui dropdown item">
+    <%= t('examples') %>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      <a class="item"><%= t('example1') %></a>
+      <a class="item"><%= t('example2') %></a>
+      <a class="item"><%= t('example3') %></a>
+    </div>
+  </div>
+
+  <!-- variant 2
+  <div class="item">
+    <div class="ui compact menu">
+      <div class="ui simple dropdown item">
+        Examples
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <a class="item">Example 1</a>
+          <a class="item">Example 2</a>
+          <a class="item">Example 3</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  -->
+
+  <div class="right menu">
+    <div class="item">
+      <!-- variant 1
+      <a href="#">Ru</a>
+      <span style="margin: 0 3px;">|</span>
+      <a href="#">En</a>
+      -->
+
+      <!-- variant 2
+      <div class="ui buttons">
+        <button class="ui button">Ru</button>
+        <button class="ui button">En</button>
+      </div>
+      -->
+
+      <!-- variant 3
+      <button class="ui left attached button disabled"><i class="ru flag"></i>Ru</button>
+      <button class="right attached ui button">En <i class="gb uk flag"></i></button>
+      -->
+
+      <!-- variant 4 -->
+<!--      <button class="ui button"><i class="ru flag"></i>Ru</button>-->
+<!--      <button class="ui button"><i class="gb uk flag"></i>En</button>-->
+      <%= language_switcher %>
+    </div>
+    <a class="item"><%= t('sign_in') %></a>
+  </div>
+</div>
+
+
+<div class="ui aligned basic segment">
+  <h1 class="ui header"><%= t('index.h1') %></h1>
+
+  <div class="ui form">
+    <div class="field">
+      <label><%= t('index.algorithm').html_safe %></label>
+
+      <div class="ui error mini message">
+        <i class="close icon"></i>
+        <div class="header">
+          There were some errors with your submission
+        </div>
+        <ul class="list">
+          <li>You must include both a upper and lower case letters in your password.</li>
+          <li>You need to select your home country.</li>
+        </ul>
+      </div>
+
+<!--      <div class="ui segment" style="padding-top: 40px;">-->
+<!--        <div class="ui top left attached label">Algorithm (<a href="#">Quick syntax guide</a>)</div>-->
+        <textarea id="alg"></textarea>
+<!--      </div>-->
+    </div>
+    <div class="field">
+      <label><%= t('index.trace') %></label>
+
+      <div class="ui error mini message">
+        <i class="close icon"></i>
+        <div class="header">
+          During execution of loop 'waiting', a new iteration must not start because condition 'not_green' is false.
+        </div>
+      </div>
+
+      <!-- variant 1 -->
+      <span style="display: none;">
+        <textarea id="trace"></textarea>
+      </span>
+
+      <!-- variant 2 -->
+      <style type="text/css" media="screen">
+          span.string, span.atom { color: #f08; font-style: italic; font-weight: bold; }
+          span.comment { color: #262; font-style: italic; line-height: 1em; }
+          span.meta { color: #555; font-style: italic; line-height: 1em; }
+          span.variable { color: #700; text-decoration: underline; }
+          span.variable-2 { color: #b11; }
+          span.struct { color: #07c; font-weight: bold; }
+          span.number { color: #f00; font-weight: bold; }
+          span.program { color: #f70; font-weight: bold; }
+          span.function { color: #707; font-weight: bold; }
+          span.action { color: #077; font-weight: bold; }
+          span.qualifier { color: #555; }
+          span.keyword { color: #00a; font-weight: bold; }
+          span.builtin { color: #30a; }
+          span.link { color: #762; }
+
+          span.warning { background-color: #ff9; }
+          span.error { background-color: #fdd; }
+      </style>
+
+      <%
+        trace = [
+          '<span class=""><span class="program">program</span> <span class="keyword">began</span></span>',
+          '&nbsp;<span class=""><span class="struct">loop</span> <span class="variable">waiting</span> <span class="keyword">began </span><span class="number">1st</span> time</span>',
+          '&nbsp;&nbsp;<span class=""><span class="struct">condition</span> <span class="struct">of</span> <span class="struct">loop</span> (<span class="variable">not_green</span>) <span class="keyword">evaluated </span><span class="number">1st</span> time - <span class="atom warning">false</span></span>',
+          '&nbsp;&nbsp;<span class="error"><span class="struct">iteration</span> <span class="number">1</span> <span class="struct">of</span> <span class="struct">loop</span> <span class="variable">waiting</span> <span class="keyword">began</span></span>',
+          '&nbsp;&nbsp;&nbsp;<span class="error"><span class="struct">alternative</span> <span class="variable">over_color</span> <span class="keyword">began </span><span class="number">1st</span> time</span>',
+          '&nbsp;&nbsp;&nbsp;&nbsp;<span class=""><span class="struct">condition</span> <span class="struct">of</span> <span class="struct">alternative</span> (<span class="variable">red</span>) <span class="keyword">evaluated </span><span class="number">1st</span> time - <span class="atom">true</span></span>',
+          '&nbsp;&nbsp;&nbsp;&nbsp;<span class=""><span class="struct">branch</span> <span class="struct">of</span> <span class="struct">condition</span> (<span class="variable">red</span>) <span class="keyword">began </span><span class="number">1st</span> time</span>',
+          '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=""><span class="variable">wait</span> <span class="keyword">executed </span><span class="number">1st</span> time</span>',
+          '&nbsp;&nbsp;&nbsp;&nbsp;<span class=""><span class="struct">branch</span> <span class="struct">of</span> <span class="struct">condition</span> (<span class="variable">red</span>) <span class="keyword">ended </span><span class="number">1st</span> time</span>',
+          '&nbsp;&nbsp;&nbsp;<span class=""><span class="struct">alternative</span> <span class="variable">over_color</span> <span class="keyword">ended </span><span class="number">1st</span> time</span>',
+          '&nbsp;&nbsp;<span class=""><span class="struct">iteration</span> <span class="number">1</span> <span class="struct">of</span> <span class="struct">loop</span> <span class="variable">waiting</span> <span class="keyword">ended</span></span>',
+          '&nbsp;&nbsp;<span class=""><span class="struct">condition</span> <span class="struct">of</span> <span class="struct">loop</span> (<span class="variable">not_green</span>) <span class="keyword">evaluated </span><span class="number">2nd</span> time - <span class="atom">true</span></span>',
+          '&nbsp;&nbsp;<span class=""><span class="struct">iteration</span> <span class="number">2</span> <span class="struct">of</span> <span class="struct">loop</span> <span class="variable">waiting</span> <span class="keyword">began</span></span>',
+          '&nbsp;&nbsp;&nbsp;<span class=""><span class="struct">alternative</span> <span class="variable">over_color</span> <span class="keyword">began </span><span class="number">2nd</span> time</span>',
+          '&nbsp;&nbsp;&nbsp;&nbsp;<span class=""><span class="struct">condition</span> <span class="struct">of</span> <span class="struct">alternative</span> (<span class="variable">red</span>) <span class="keyword">evaluated </span><span class="number">2nd</span> time - <span class="atom">false</span></span>',
+          '&nbsp;&nbsp;&nbsp;&nbsp;<span class=""><span class="struct">condition</span> <span class="struct">of</span> <span class="struct">alternative</span> (<span class="variable">yellow</span>) <span class="keyword">evaluated </span><span class="number">1st</span> time - <span class="atom">false</span></span>',
+          '&nbsp;&nbsp;&nbsp;<span class=""><span class="struct">alternative</span> <span class="variable">over_color</span> <span class="keyword">ended </span><span class="number">2nd</span> time</span>',
+          '&nbsp;&nbsp;<span class=""><span class="struct">iteration</span> <span class="number">2</span> <span class="struct">of</span> <span class="struct">loop</span> <span class="variable">waiting</span> <span class="keyword">ended</span></span>',
+          '&nbsp;&nbsp;<span class=""><span class="struct">condition</span> <span class="struct">of</span> <span class="struct">loop</span> (<span class="variable">not_green</span>) <span class="keyword">evaluated </span><span class="number">3rd</span> time - <span class="atom">false</span></span>',
+          '&nbsp;<span class=""><span class="struct">loop</span> <span class="variable">waiting</span> <span class="keyword">ended </span><span class="number">1st</span> time</span>',
+          '<span class=""><span class="program">program</span>'
+        ]
+      %>
+
+      <table class="ui very compact celled definition table">
+        <tbody>
+        <% trace.each do |elem| %>
+          <tr>
+            <td class="collapsing">
+              <div class="ui fitted slider checkbox">
+                <input type="checkbox"> <label></label>
+              </div>
+            </td>
+            <td>
+              <%= elem.html_safe %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="ui inverted vertical footer segment">
+  <%= t('index.copyright') %>
+</div>
+
+<script>
+  $(function() {
+    $('.ui.dropdown').dropdown();
+
+    define_syntax_mode();
+
+    cm_config = {
+      lineNumbers: true,
+      theme: "elegant"
+    };
+
+    cm_alg = CodeMirror.fromTextArea(document.getElementById("alg"), cm_config);
+    cm_trace = CodeMirror.fromTextArea(document.getElementById("trace"), cm_config);
+    cm_trace.setOption("readOnly", true);
+    e_alg = cm_alg.getDoc();
+    e_trace = cm_trace.getDoc();
+
+    e_alg.setValue(`while not_green -> false // waiting
+    if red -> true // over_color
+        wait
+    else if yellow -> true
+        get_ready
+`);
+    e_trace.setValue(`program began
+ loop waiting began 1st time
+  condition of loop (not_green) evaluated 1st time - false
+  iteration 1 of loop waiting began
+   alternative over_color began 1st time
+    condition of alternative (red) evaluated 1st time - true
+    branch of condition (red) began 1st time
+     wait executed 1st time
+    branch of condition (red) ended 1st time
+   alternative over_color ended 1st time
+  iteration 1 of loop waiting ended
+  condition of loop (not_green) evaluated 2nd time - true
+  iteration 2 of loop waiting began
+   alternative over_color began 2nd time
+    condition of alternative (red) evaluated 2nd time - false
+    condition of alternative (yellow) evaluated 1st time - false
+   alternative over_color ended 2nd time
+  iteration 2 of loop waiting ended
+  condition of loop (not_green) evaluated 3rd time - false
+ loop waiting ended 1st time
+program
+`);
+
+    function define_syntax_mode() {
+      keyword_re = /(?:начался|началась|началось|began|закончился|закончилась|закончилось|ended|выполнился|выполнилась|выполнилось|executed|evaluated|calculated|если|иначе|делать|пока|для|от|до|шаг|с\s+шагом|if|else|do|while|for|from|to|with\s+step|step|каждого|в|из|по|к|foreach|each|in)(?:\s|$)/i
+
+      struct_re = /развилка|развилки|альтернативная|ветка|branch|alternative|условия|переход|update|итерация|iteration|иначe|условие|цикла|condition|of|loop|инициализация|init|initialization|цикл|следование|sequence/i
+
+      CodeMirror.defineSimpleMode("algtracemode", {
+        // The start state contains the rules that are intially used
+        start: [
+          {regex: keyword_re, token: "keyword"},
+          {regex: /true|false|ложь|истина/i, token: "atom"},
+          {regex: /\d+(?:st|nd|rd|th)?/i,
+            // /0x[a-f\d]+|[-+]?(?:\.\d+|\d+\.?\d*)(?:e[-+]?\d+)?/i,
+            token: "number"},
+          {regex: /(?:\/\/|#).*/, token: "comment"},
+          {regex: struct_re, token: "struct"},
+          {regex: /действие|action/i, token: "action"},
+          {regex: /программа|program/i, token: "program"},
+          {regex: /функция|function/i, token: "function"},
+          {regex: /й|раз|time/i, token: null},
+          {regex: /[\wа-яё]+/i, token: "variable"}
+        ],
+        meta: {
+          dontIndentStates: ["comment"],
+          lineComment: "//"
+        }
+      });
+    }
+  });
+</script>
