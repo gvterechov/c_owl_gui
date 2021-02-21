@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>COwlGui</title>
+    <title><%= yield(:title) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <% #TODO %>
+<!--    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">-->
+<!--    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">-->
+<!--    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">-->
+<!--    <link rel="manifest" href="/site.webmanifest">-->
+<!--    https://favicon.io/favicon-generator/-->
+    <%= favicon_link_tag(Rails.env.production? ? 'favicon.ico' : 'favicon_dev.ico') %>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/codemirror.min.css">
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/theme/elegant.min.css">-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/addon/mode/simple.min.js"></script>
+
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>

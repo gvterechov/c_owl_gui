@@ -1,33 +1,31 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
-en:
-  hello: "Hello world"
+ru:
+  index:
+    title: 'Порядок выполнения алгоритма'
+    h1: 'Тьютор алгоритмов: тестирование расчётной части'
+    algorithm: 'Алгоритм'
+    syntax_guide: 'Краткая справка'
+    trace: 'Траcса:'
+    copyright: 'Кафедра ПОАС, ВолгГТУ©'
+  teacher_modal:
+    header: 'Пожалуйста, расскажите нам о себе'
+    description: 'Нам важно знать кому интересен наш сервис. Мы собираем статистику чтобы его улучшить.'
+    institution: 'Учебное заведение'
+    institution_placeholder: 'МГУ'
+    type: 'Тип'
+    position: 'Должность'
+    position_placeholder: 'Доцент'
+    feedback: 'Отзыв'
+    cancel: 'Я хочу остаться инкогнито'
+  new: 'Новая задача'
+  run: 'Получить трассу'
+  share: 'Сохранить задачу'
+  check: 'Проверить'
+  help: 'Помощь'
+  syntax: 'Синтаксис'
+  copy: 'Копировать'
+  submit: 'Отправить'
+  examples: 'Примеры'
+  example1: 'Пример 1'
+  example2: 'Пример 2'
+  example3: 'Пример 3'
+  sign_in: 'Войти'
