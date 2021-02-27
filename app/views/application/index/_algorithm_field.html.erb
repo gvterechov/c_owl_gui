@@ -147,16 +147,16 @@
     // user config
     setup_blockly_workspace(workspace);
 
-    $('#prepare').click(function(){
-      export_xml();
-    });
+    // $('#prepare').click(function(){
+    //   export_xml();
+    // });
   });
 
-  function export_xml() {
-    var xml = Blockly.Xml.workspaceToDom(workspace);
-    // var xml_text = Blockly.Xml.domToText(xml);  // compact form
-    var xml_text = Blockly.Xml.domToPrettyText(xml);  // easy-readable form
-  }
+  // function export_xml() {
+  //   var xml = Blockly.Xml.workspaceToDom(workspace);
+  // //   var xml_text = Blockly.Xml.domToText(xml);  // compact form
+  //   var xml_text = Blockly.Xml.domToPrettyText(xml);  // easy-readable form
+  // }
 </script>
 
 <script>

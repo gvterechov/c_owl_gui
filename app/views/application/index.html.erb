@@ -29,5 +29,33 @@
     $('.ui.modal').modal({
       blurring: true
     });
+
+    // Сохранение выражения
+    $('#create_task').click(function() {
+      let elem = $(this);
+      elem.toggleClass('loading');
+
+      $.ajax({
+        method: "POST",
+        url: '/create_task',
+        data: { task: { expression: JSON.stringify(expressionTokens()) } },
+        // dataType: "json",
+        error: function (jqXHR) {
+          // TODO показать сообщение об ошибке
+          alert('error');
+        },
+        success: function (data) {
+          $("#task_url").val(window.location.href + data['task_path']);
+        },
+        complete: function() {
+          elem.toggleClass('loading');
+        }
+      });
+    });
+
+    function expressionTokens() {
+      let xml = Blockly.Xml.workspaceToDom(workspace);
+      return Blockly.Xml.domToPrettyText(xml);
+    };
   });
 </script>

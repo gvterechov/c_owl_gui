@@ -4,7 +4,25 @@ class ApplicationController < ActionController::Base
   def index
   end
 
-  def task
+  # TODO вынести в tasks_controller
+  def show_task
+    task = Task.find_by(token: params[:token])
+    task.update_column(:views_count, task.views_count + 1)
+
+    # TODO
+  end
+
+  # TODO вынести в tasks_controller
+  def create_task
+    task = Task.new(task_params)
+
+    respond_to do |format|
+      if task.save
+        format.json { render json: { task_path: "/tasks/#{task.token}" }, status: :created }
+      else
+        head :bad_request
+      end
+    end
   end
 
   private
@@ -26,5 +44,10 @@ class ApplicationController < ActionController::Base
 
     def locale_exist?(locale)
       I18n.available_locales.include?(locale)
+    end
+
+    # TODO вынести в tasks_controller
+    def task_params
+      params.require(:task).permit(:expression)
     end
 end
