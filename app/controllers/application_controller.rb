@@ -12,6 +12,15 @@ class ApplicationController < ActionController::Base
     # TODO
   end
 
+  def check_expression
+    data = JSON.parse(params[:data])
+    result = COwl.creating_task(data)
+
+    respond_to do |format|
+      format.html { render partial: 'application/index/trace_field', locals: { data: result } }
+    end
+  end
+
   # TODO вынести в tasks_controller
   def create_task
     task = Task.new(task_params)

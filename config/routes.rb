@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   routes = -> do
     get "/tasks/:token", to: 'application#show_task'
+    get :check_expression, to: 'application#check_expression', format: :json
     post :create_task, to: 'application#create_task', format: :json
   end
 
