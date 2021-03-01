@@ -2,7 +2,7 @@ class COwl
   def self.creating_task(expression = nil)
     uri = URI.parse("http://localhost:2020/creating_task")
     http = Net::HTTP.new(uri.host, uri.port)
-    response = http.post(uri, expression.to_json)
+    response = http.post(uri, expression.to_json.gsub('\#', ''), 'Content-Type': 'application/json')
     JSON.load(response.body)&.with_indifferent_access
   end
 
