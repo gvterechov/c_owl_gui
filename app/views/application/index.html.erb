@@ -5,13 +5,9 @@
 <input type="hidden" id="lang" value="<%= I18n.locale %>">
 
 <div class="ui aligned basic segment">
-<!--  <h1 class="ui header"><%#= t('index.h1') %></h1>-->
-
   <div class="ui form">
     <%= render partial: 'application/index/algorithm_field' %>
-    <div id="trace">
-      <%#= render partial: 'application/index/trace_field' %>
-    </div>
+    <div id="trace"></div>
   </div>
 </div>
 
@@ -48,7 +44,6 @@
           alert('error');
         },
         success: function (data) {
-          // alert('success');
           $('#trace').html(data);
         },
         complete: function() {

@@ -32,7 +32,6 @@
 en:
   index:
     title: 'Algorithm execution order'
-    h1: 'Algorithms Tutor Backend Test (ISWC Demo)'
     algorithm: 'Algorithm'
     syntax_guide: 'Quick syntax guide'
     trace: 'Trace:'

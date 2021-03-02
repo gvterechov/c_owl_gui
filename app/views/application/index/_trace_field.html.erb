@@ -8,12 +8,6 @@
     </div>
   </div>
 
-  <!-- variant 1 -->
-<!--  <span style="display: none;">-->
-<!--    <textarea id="trace"></textarea>-->
-<!--  </span>-->
-
-  <!-- variant 2 -->
   <style type="text/css" media="screen">
       span.string, span.atom { color: #f08; font-style: italic; font-weight: bold; }
       span.comment { color: #262; font-style: italic; line-height: 1em; }
@@ -34,48 +28,24 @@
       span.error { background-color: #fdd; }
   </style>
 
-  <%
-    trace = [
-      '<span class=""><span class="program">program</span> <span class="keyword">began</span></span>',
-      '&nbsp;<span class=""><span class="struct">loop</span> <span class="variable">waiting</span> <span class="keyword">began </span><span class="number">1st</span> time</span>',
-      '&nbsp;&nbsp;<span class=""><span class="struct">condition</span> <span class="struct">of</span> <span class="struct">loop</span> (<span class="variable">not_green</span>) <span class="keyword">evaluated </span><span class="number">1st</span> time - <span class="atom warning">false</span></span>',
-      '&nbsp;&nbsp;<span class="error"><span class="struct">iteration</span> <span class="number">1</span> <span class="struct">of</span> <span class="struct">loop</span> <span class="variable">waiting</span> <span class="keyword">began</span></span>',
-      '&nbsp;&nbsp;&nbsp;<span class="error"><span class="struct">alternative</span> <span class="variable">over_color</span> <span class="keyword">began </span><span class="number">1st</span> time</span>',
-      '&nbsp;&nbsp;&nbsp;&nbsp;<span class=""><span class="struct">condition</span> <span class="struct">of</span> <span class="struct">alternative</span> (<span class="variable">red</span>) <span class="keyword">evaluated </span><span class="number">1st</span> time - <span class="atom">true</span></span>',
-      '&nbsp;&nbsp;&nbsp;&nbsp;<span class=""><span class="struct">branch</span> <span class="struct">of</span> <span class="struct">condition</span> (<span class="variable">red</span>) <span class="keyword">began </span><span class="number">1st</span> time</span>',
-      '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=""><span class="variable">wait</span> <span class="keyword">executed </span><span class="number">1st</span> time</span>',
-      '&nbsp;&nbsp;&nbsp;&nbsp;<span class=""><span class="struct">branch</span> <span class="struct">of</span> <span class="struct">condition</span> (<span class="variable">red</span>) <span class="keyword">ended </span><span class="number">1st</span> time</span>',
-      '&nbsp;&nbsp;&nbsp;<span class=""><span class="struct">alternative</span> <span class="variable">over_color</span> <span class="keyword">ended </span><span class="number">1st</span> time</span>',
-      '&nbsp;&nbsp;<span class=""><span class="struct">iteration</span> <span class="number">1</span> <span class="struct">of</span> <span class="struct">loop</span> <span class="variable">waiting</span> <span class="keyword">ended</span></span>',
-      '&nbsp;&nbsp;<span class=""><span class="struct">condition</span> <span class="struct">of</span> <span class="struct">loop</span> (<span class="variable">not_green</span>) <span class="keyword">evaluated </span><span class="number">2nd</span> time - <span class="atom">true</span></span>',
-      '&nbsp;&nbsp;<span class=""><span class="struct">iteration</span> <span class="number">2</span> <span class="struct">of</span> <span class="struct">loop</span> <span class="variable">waiting</span> <span class="keyword">began</span></span>',
-      '&nbsp;&nbsp;&nbsp;<span class=""><span class="struct">alternative</span> <span class="variable">over_color</span> <span class="keyword">began </span><span class="number">2nd</span> time</span>',
-      '&nbsp;&nbsp;&nbsp;&nbsp;<span class=""><span class="struct">condition</span> <span class="struct">of</span> <span class="struct">alternative</span> (<span class="variable">red</span>) <span class="keyword">evaluated </span><span class="number">2nd</span> time - <span class="atom">false</span></span>',
-      '&nbsp;&nbsp;&nbsp;&nbsp;<span class=""><span class="struct">condition</span> <span class="struct">of</span> <span class="struct">alternative</span> (<span class="variable">yellow</span>) <span class="keyword">evaluated </span><span class="number">1st</span> time - <span class="atom">false</span></span>',
-      '&nbsp;&nbsp;&nbsp;<span class=""><span class="struct">alternative</span> <span class="variable">over_color</span> <span class="keyword">ended </span><span class="number">2nd</span> time</span>',
-      '&nbsp;&nbsp;<span class=""><span class="struct">iteration</span> <span class="number">2</span> <span class="struct">of</span> <span class="struct">loop</span> <span class="variable">waiting</span> <span class="keyword">ended</span></span>',
-      '&nbsp;&nbsp;<span class=""><span class="struct">condition</span> <span class="struct">of</span> <span class="struct">loop</span> (<span class="variable">not_green</span>) <span class="keyword">evaluated </span><span class="number">3rd</span> time - <span class="atom">false</span></span>',
-      '&nbsp;<span class=""><span class="struct">loop</span> <span class="variable">waiting</span> <span class="keyword">ended </span><span class="number">1st</span> time</span>',
-      '<span class=""><span class="program">program</span>'
-    ]
-  %>
-
   <table class="ui very compact small selectable celled definition table">
     <tbody>
-    <% trace.each do |elem| %>
+    <% data[:trace_json].each do |elem| %>
       <tr>
+        <!--
         <td class="collapsing">
           <div class="ui checkbox">
             <input type="checkbox"> <label></label>
           </div>
         </td>
+        -->
         <td>
-          <%= elem.html_safe %>
+          <%= elem[:as_html].html_safe %>
         </td>
       </tr>
     <% end %>
     </tbody>
-    <!--
+    <!-- Вспомогательные элементы управления
     <tfoot class="full-width">
     <tr>
       <th colspan="2">
