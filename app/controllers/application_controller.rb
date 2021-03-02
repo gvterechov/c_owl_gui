@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
     task = Task.find_by(token: params[:token])
     task.update_column(:views_count, task.views_count + 1)
 
-    # TODO
+    data = JSON.parse(task.expression)
+    @result = COwl.creating_task(data)
   end
 
   def check_expression
@@ -17,7 +18,7 @@ class ApplicationController < ActionController::Base
     result = COwl.creating_task(data)
 
     respond_to do |format|
-      format.html { render partial: 'application/index/trace_field', locals: { data: result } }
+      format.html { render partial: 'application/common/trace_field', locals: { data: result } }
     end
   end
 

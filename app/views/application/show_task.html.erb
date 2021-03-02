@@ -1,22 +1,21 @@
 <% title t('index.title') %>
 
-<%= render partial: 'application/task/header' %>
+<%= render partial: 'application/show_task/header' %>
 
 <input type="hidden" id="lang" value="<%= I18n.locale %>">
 
 <div class="ui aligned basic segment">
-<!--  <h1 class="ui header"><%#= t('index.h1') %></h1>-->
-
   <div class="ui form">
-    <%= render partial: 'application/task/algorithm_field' %>
-    <%= render partial: 'application/task/trace_field' %>
+    <%= render partial: 'application/common/algorithm_text_field', locals: { data: @result } %>
+    <%#= render partial: 'application/common/trace_field', locals: { data: @result } %>
   </div>
 </div>
 
-<%= render partial: 'application/common/footer' %>
+<%#= render partial: 'application/common/footer' %>
 
-<%= render partial: 'application/task/student_first_modal' %>
-<%= render partial: 'application/task/student_second_modal' %>
+<%= render partial: 'application/show_task/student_first_modal' %>
+<%= render partial: 'application/show_task/student_second_modal' %>
+
 
 
 <script>
@@ -29,89 +28,5 @@
     // attach events to buttons
     $('.second.modal')
         .modal('attach events', '.first.modal .button');
-
-    define_syntax_mode();
-
-    cm_config = {
-      viewportMargin: Infinity,
-      readOnly: true,
-      lineNumbers: true,
-      theme: "elegant"
-    };
-
-    cm_alg = CodeMirror.fromTextArea(document.getElementById("alg"), cm_config);
-    cm_trace = CodeMirror.fromTextArea(document.getElementById("trace"), cm_config);
-    cm_trace.setOption("readOnly", true);
-    e_alg = cm_alg.getDoc();
-    e_trace = cm_trace.getDoc();
-
-    // добавить для управляющих конструкций
-    //<i class="play icon" style="font-size: .7em"></i>
-    //<i class="stop icon" style="font-size: .7em"></i>
-
-    e_alg.setValue(`while not_green -> false // waiting
-    if red -> true // over_color
-        wait
-    else if yellow -> true
-        get_ready
-`);
-
-//     e_alg.setValue(`while not_green  // waiting
-//   if red  // over_color
-//     wait
-//   else if yellow
-//     get_ready
-// `);
-
-    e_trace.setValue(`program began
- loop waiting began 1st time
-  condition of loop (not_green) evaluated 1st time - false
-  iteration 1 of loop waiting began
-   alternative over_color began 1st time
-    condition of alternative (red) evaluated 1st time - true
-    branch of condition (red) began 1st time
-     wait executed 1st time
-    branch of condition (red) ended 1st time
-   alternative over_color ended 1st time
-  iteration 1 of loop waiting ended
-  condition of loop (not_green) evaluated 2nd time - true
-  iteration 2 of loop waiting began
-   alternative over_color began 2nd time
-    condition of alternative (red) evaluated 2nd time - false
-    condition of alternative (yellow) evaluated 1st time - false
-   alternative over_color ended 2nd time
-  iteration 2 of loop waiting ended
-  condition of loop (not_green) evaluated 3rd time - false
- loop waiting ended 1st time
-program
-`);
-
-    function define_syntax_mode() {
-      keyword_re = /(?:начался|началась|началось|began|закончился|закончилась|закончилось|ended|выполнился|выполнилась|выполнилось|executed|evaluated|calculated|если|иначе|делать|пока|для|от|до|шаг|с\s+шагом|if|else|do|while|for|from|to|with\s+step|step|каждого|в|из|по|к|foreach|each|in)(?:\s|$)/i
-
-      struct_re = /развилка|развилки|альтернативная|ветка|branch|alternative|условия|переход|update|итерация|iteration|иначe|условие|цикла|condition|of|loop|инициализация|init|initialization|цикл|следование|sequence/i
-
-      CodeMirror.defineSimpleMode("algtracemode", {
-        // The start state contains the rules that are intially used
-        start: [
-          {regex: keyword_re, token: "keyword"},
-          {regex: /true|false|ложь|истина/i, token: "atom"},
-          {regex: /\d+(?:st|nd|rd|th)?/i,
-            // /0x[a-f\d]+|[-+]?(?:\.\d+|\d+\.?\d*)(?:e[-+]?\d+)?/i,
-            token: "number"},
-          {regex: /(?:\/\/|#).*/, token: "comment"},
-          {regex: struct_re, token: "struct"},
-          {regex: /действие|action/i, token: "action"},
-          {regex: /программа|program/i, token: "program"},
-          {regex: /функция|function/i, token: "function"},
-          {regex: /й|раз|time/i, token: null},
-          {regex: /[\wа-яё]+/i, token: "variable"}
-        ],
-        meta: {
-          dontIndentStates: ["comment"],
-          lineComment: "//"
-        }
-      });
-    }
   });
 </script>
