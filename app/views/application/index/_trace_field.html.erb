@@ -1,4 +1,11 @@
 <div class="field">
+  <label><%= t('index.algorithm') %>:</label>
+  <div>
+    <%= data[:algorithm_as_html].html_safe %>
+  </div>
+</div>
+
+<div class="field">
   <label><%= t('index.trace') %></label>
 
   <div class="ui error mini message">
