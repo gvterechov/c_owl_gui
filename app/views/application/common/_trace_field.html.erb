@@ -21,6 +21,9 @@
         -->
         <td>
           <%= elem[:as_html].html_safe %>
+          <% if elem[:is_final] %>
+            <input type="hidden" id="is_final">
+          <% end %>
         </td>
       </tr>
     <% end %>

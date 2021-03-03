@@ -35,6 +35,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def verify_trace_act
+    data = JSON.parse(params[:data])
+    result = COwl.verify_trace_act(data)
+
+    respond_to do |format|
+      format.html { render partial: 'application/show_task/algorithm_trainer', locals: { data: result } }
+    end
+  end
+
   private
     def set_locale
       locale_from_header = extract_locale_from_accept_language_header

@@ -17,7 +17,7 @@
 
 <script>
   $(function() {
-    $('.ui.dropdown').dropdown();
+    // $('.ui.dropdown').dropdown();
 
     $('.ui.button.share').popup({
       popup : $('.popup.share'),
@@ -68,6 +68,7 @@
         method: "POST",
         url: '/create_task',
         data: { task: { expression: JSON.stringify(prepareExpression()) } },
+        // data: { data: JSON.stringify(prepareExpression()) },
         // dataType: "json",
         error: function (jqXHR) {
           // TODO показать сообщение об ошибке
