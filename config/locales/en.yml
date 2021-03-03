@@ -46,6 +46,10 @@ en:
     position_placeholder: 'Lecturer'
     feedback: 'Feedback'
     cancel: 'I want to stay incognito'
+  success_modal:
+    header: 'Congratulations!'
+    description: 'You have successfully completed the task!'
+    ok: 'Ok'
   new: 'New task'
   run: 'Get trace'
   share: 'Save task'

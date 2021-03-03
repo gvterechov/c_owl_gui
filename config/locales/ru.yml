@@ -15,6 +15,10 @@ ru:
     position_placeholder: 'Доцент'
     feedback: 'Отзыв'
     cancel: 'Я хочу остаться инкогнито'
+  success_modal:
+    header: 'Поздравляем!'
+    description: 'Вы успешно справились с заданием!'
+    ok: 'Продолжить'
   new: 'Новая задача'
   run: 'Получить трассу'
   share: 'Сохранить задачу'
