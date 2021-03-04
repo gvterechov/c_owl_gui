@@ -49,6 +49,15 @@
       }
     }
 
+    function on_algorithm_element_clicked(elem) {
+    	elem = elem || this;
+    	act_type = elem.getAttribute('act_type');
+    	algorithm_element_id = parseInt(elem.getAttribute('algorithm_element_id'));
+    	console.log("clicked: ", {algorithm_element_id, act_type});
+    	// send_clicked_act_to_endpoint(algorithm_element_id, act_type);
+    }
+
+
     function algorithmClick() {
       // TODO блокировать нажатие на элементы алгоритма пока не пришел ответ от сервера
       $.ajax({
