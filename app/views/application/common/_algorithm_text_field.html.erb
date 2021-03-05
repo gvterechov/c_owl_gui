@@ -9,3 +9,7 @@
        id="algorithm_json"
        value="<%= data[:algorithm_json].to_json %>"
 >
+<input type="hidden"
+       id="existing_trace_json"
+       value="<%= (data[:full_trace_json] or []).to_json %>"
+>
