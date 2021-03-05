@@ -35,10 +35,10 @@
 
     function prepareData(elem) {
       let lang = $('#lang').val();
-      let algorithm_json = $('#algorithm_json').val();
+      let algorithm_json = JSON.parse($('#algorithm_json').val());
       let algorithm_element_id = elem.attr('algorithm_element_id');
-      let act_type = null; // TODO брать из algorithm_button_tips для соответствующего algorithm_element_id
-      let existing_trace_json = null; // TODO список валидных актов, для начала пустой, брать из trace_lines_json, у которых is_valid true
+      let act_type = elem.attr('act_type'); // SOLVED: algorithm_button_tips уже не актуален
+      let existing_trace_json = null; // TODO список валидных актов, для начала пустой, брать из trace_json, у которых is_valid true
 
       return {
         user_language: lang,
@@ -48,15 +48,6 @@
         existing_trace_json: existing_trace_json,
       }
     }
-
-    function on_algorithm_element_clicked(elem) {
-    	elem = elem || this;
-    	act_type = elem.getAttribute('act_type');
-    	algorithm_element_id = parseInt(elem.getAttribute('algorithm_element_id'));
-    	console.log("clicked: ", {algorithm_element_id, act_type});
-    	// send_clicked_act_to_endpoint(algorithm_element_id, act_type);
-    }
-
 
     function algorithmClick() {
       // TODO блокировать нажатие на элементы алгоритма пока не пришел ответ от сервера
@@ -77,7 +68,7 @@
           $('#algorithm_trainer').html(data);
 
           // Показать модальное окно об успешном завершении задачи
-          // (если в trace_lines_json есть акт, у которого is_final true)
+          // (если в trace_json есть акт, у которого is_final true)
           if ($('#is_final').length > 0) {
             $('.ui.modal.success').modal('show');
           }
