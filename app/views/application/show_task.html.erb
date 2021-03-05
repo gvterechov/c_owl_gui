@@ -32,7 +32,7 @@
         .modal('attach events', '.first.modal .button');
 
 	function bindAlgorithmButtons(argument) {
-	    $('.button').click(algorithmClick);
+	    $('.alg_button').click(algorithmClick);
     }
     bindAlgorithmButtons();
 
@@ -74,6 +74,10 @@
           // (если в full_trace_json есть акт, у которого is_final true)
           if ($('#is_final').length > 0) {
             $('.ui.modal.success').modal('show');
+
+          	// Задача решена - убрать все кнопки из algorithm_text_field
+          	$('.alg_button').remove();
+          	
           } else {
             bindAlgorithmButtons();
           }
