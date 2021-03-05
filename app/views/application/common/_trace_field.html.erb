@@ -24,6 +24,11 @@
           <% if elem[:is_final] %>
             <input type="hidden" id="is_final">
           <% end %>
+          
+          <% unless elem[:is_valid] %>
+          	<p>
+            <span class="warning"><%= elem[:explanations].join("<br>").html_safe %></span>
+          <% end %>
         </td>
       </tr>
     <% end %>
