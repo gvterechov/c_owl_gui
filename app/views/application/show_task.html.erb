@@ -31,7 +31,10 @@
     $('.second.modal')
         .modal('attach events', '.first.modal .button');
 
-    $('.button').click(algorithmClick);
+	function bindAlgorithmButtons(argument) {
+	    $('.button').click(algorithmClick);
+    }
+    bindAlgorithmButtons();
 
     function prepareData(elem) {
       let lang = $('#lang').val();
@@ -68,9 +71,11 @@
           $('#algorithm_trainer').html(data);
 
           // Показать модальное окно об успешном завершении задачи
-          // (если в trace_json есть акт, у которого is_final true)
+          // (если в full_trace_json есть акт, у которого is_final true)
           if ($('#is_final').length > 0) {
             $('.ui.modal.success').modal('show');
+          } else {
+            bindAlgorithmButtons();
           }
         }//,
         // complete: function() {
