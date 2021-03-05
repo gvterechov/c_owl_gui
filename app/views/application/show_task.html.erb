@@ -54,6 +54,12 @@
 
     function algorithmClick() {
       // TODO блокировать нажатие на элементы алгоритма пока не пришел ответ от сервера
+      
+      // заменим кнопки на часики: hourglass half
+      $('#algorithm_text_field .icon').removeClass("alg_button tooltip play stop").addClass("hourglass half");
+      
+
+      
       $.ajax({
         method: "POST",
         url: '/verify_trace_act',
