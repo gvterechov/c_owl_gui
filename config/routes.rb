@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get "/tasks/:token", to: 'application#show_task'
     get :check_expression, to: 'application#check_expression', format: :json
     post :create_task, to: 'application#create_task', format: :json
-    get :verify_trace_act, to: 'application#verify_trace_act', format: :json
+    post :verify_trace_act, to: 'application#verify_trace_act', format: :json
   end
 
   routes.call
