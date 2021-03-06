@@ -16,8 +16,7 @@
     <table class="ui very compact small selectable celled definition table">
       <tbody>
       <% trace_json.each do |elem| %>
-      <%# data[:trace_json].each do |elem| %>
-        <tr class="<%= 'ui red tertiary inverted segment' if elem[:is_valid] == false %>">
+        <tr>
           <!--
           <td class="collapsing">
             <div class="ui checkbox">
@@ -25,16 +24,30 @@
             </div>
           </td>
           -->
-          <td
-            <% if elem[:is_valid] == false  %>
-            <% explanations = '<h5>' + t('index.act_has_mistakes') + '</h5><ul>' + (elem[:explanations].map { |s| "<li>"+s.gsub('"', '&quot;')+"</li>" }).join() + '</ul>' %>
-              class="trace_mistake"
-              data-html="<%= explanations.html_safe %>"
-              data-variation="very wide"
-              data-position="top left"
+
+          <td>
+            <% if elem[:is_valid] == false %>
+              <div class="ui red horizontal label">
+                <i class="exclamation triangle icon"
+                   style="margin: 0;"></i>
+              </div>
             <% end %>
-          >
+
             <%= elem[:as_html].html_safe %>
+
+            <% if elem[:is_valid] == false %>
+              <div class="ui mini negative message">
+                <div class="header">
+                  <%= t('index.act_has_mistakes') %>
+                </div>
+                <ul class="list">
+                  <% elem[:explanations].each do |message| %>
+                    <li><%= message.html_safe %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
             <% if elem[:is_final] %>
               <input type="hidden" id="is_final">
             <% end %>

@@ -36,7 +36,7 @@ en:
     syntax_guide: 'Quick syntax guide'
     trace: 'Trace:'
     copyright: 'POAS department, VSTU©'
-    act_has_mistakes: 'The act of trace is erroneous'
+    act_has_mistakes: 'You should pay attention'
     algorithm_error: 'Algorithm error, check the algorithm.'
   teacher_modal:
     header: 'Please tell us about yourself'

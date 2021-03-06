@@ -5,7 +5,7 @@ ru:
     syntax_guide: 'Краткая справка'
     trace: 'Траcса:'
     copyright: 'Кафедра ПОАС, ВолгГТУ©'
-    act_has_mistakes: 'Акт трассы содержит ошибки'
+    act_has_mistakes: 'Вам стоит обратить внимание'
     algorithm_error: 'Ошибка алгоритма, проверьте алгоритм.'
   teacher_modal:
     header: 'Пожалуйста, расскажите нам о себе'
