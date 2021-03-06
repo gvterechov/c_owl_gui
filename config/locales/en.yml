@@ -37,6 +37,7 @@ en:
     trace: 'Trace:'
     copyright: 'POAS department, VSTU©'
     act_has_mistakes: 'The act of trace is erroneous'
+    algorithm_error: 'Algorithm error, check the algorithm.'
   teacher_modal:
     header: 'Please tell us about yourself'
     description: 'It is important for us to know who is interested in our service. We collect statistics to improve it.'

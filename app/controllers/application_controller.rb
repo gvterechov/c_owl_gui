@@ -18,7 +18,20 @@ class ApplicationController < ActionController::Base
     result = COwl.creating_task(data)
 
     respond_to do |format|
-      format.html { render partial: 'application/common/trace_field', locals: { data: result } }
+      format.html {
+        render json: {
+          trace_html: render_to_string(partial: 'application/common/trace_field',
+                                       locals: {
+                                         data: result
+                                       },
+                                       layout: false),
+          errors_html: render_to_string(partial: 'application/index/errors',
+                                        locals: {
+                                          errors: result[:syntax_errors]
+                                        },
+                                        layout: false)
+        }
+      }
     end
   end
 
