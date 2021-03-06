@@ -31,11 +31,12 @@
 
 en:
   index:
-    title: 'Algorithm execution order'
+    title: 'Control flow statements'
     algorithm: 'Algorithm'
     syntax_guide: 'Quick syntax guide'
     trace: 'Trace:'
     copyright: 'POAS department, VSTU©'
+    act_has_mistakes: 'The act of trace is erroneous'
   teacher_modal:
     header: 'Please tell us about yourself'
     description: 'It is important for us to know who is interested in our service. We collect statistics to improve it.'

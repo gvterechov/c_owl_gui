@@ -23,8 +23,10 @@
         -->
         <td
           <% if elem[:is_valid] == false  %>
-	        <% explanations = elem[:explanations].join(' ') %>
-            data-tooltip="<%= explanations %>" 
+	        <% explanations = '<h5>' + t('index.act_has_mistakes') + '</h5><ul>' + (elem[:explanations].map { |s| "<li>"+s.gsub('"', '&quot;')+"</li>" }).join() + '</ul>' %>
+            class="trace_mistake"
+            data-html="<%= explanations.html_safe %>" 
+            data-variation="very wide"
             data-position="top left"
           <% end %>
         >
