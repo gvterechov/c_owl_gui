@@ -13,7 +13,7 @@
     <!-- TODO -->
     <% (data[:full_trace_json] || data[:trace_json]).each do |elem| %>
     <%# data[:trace_json].each do |elem| %>
-      <tr>
+      <tr class="<%= 'ui red tertiary inverted segment' if elem[:is_valid] == false %>">
         <!--
         <td class="collapsing">
           <div class="ui checkbox">
@@ -21,15 +21,16 @@
           </div>
         </td>
         -->
-        <td>
+        <td
+          <% if elem[:is_valid] == false  %>
+	        <% explanations = elem[:explanations].join(' ') %>
+            data-tooltip="<%= explanations %>" 
+            data-position="top left"
+          <% end %>
+        >
           <%= elem[:as_html].html_safe %>
           <% if elem[:is_final] %>
             <input type="hidden" id="is_final">
-          <% end %>
-          
-          <% if elem[:is_valid] == false %>
-            <p>
-            <span class="warning"><%= elem[:explanations].join("<br>").html_safe %></span>
           <% end %>
         </td>
       </tr>
