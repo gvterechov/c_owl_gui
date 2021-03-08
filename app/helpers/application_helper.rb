@@ -19,16 +19,14 @@ module ApplicationHelper
   # @param locale [Symbol] локаль, для которой сгенерировать ссылку
   # @return [String] url на заданную страницу на другом языке
   def alternate_url(original_url, locale)
+    current_url = URI(original_url)
     lang_in_url = Regexp.new("/#{I18n.locale}(?=/|$)")
 
-    if original_url.match?(lang_in_url) # если в original_url есть /ru/ или оканчивается на /ru
+    if original_url.match?(lang_in_url)
       original_url.sub(lang_in_url, "/#{locale}")
-
-      # иначе если original_url оканчивается на / (ссылка на главную)
-    elsif original_url.last == '/'
-      "#{original_url}#{locale}"
-
-      # иначе original_url содержит только домен (ссылка на главную)
+    elsif current_url.path.present?
+      current_url.path = "/#{locale}#{current_url.path}"
+      current_url.to_s
     else
       "#{original_url}/#{locale}"
     end
