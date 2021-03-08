@@ -39,6 +39,20 @@
   });
 
 
+    // Local Storage
+	function save_xml(xml)
+	{
+		localStorage.blockly_xml_backup = xml
+	}
+	// localStorage
+	function load_xml()
+	{
+		str = localStorage.blockly_xml_backup
+		return str || null;
+	}
+
+
+
 
 // init_blockly.js
 
@@ -465,7 +479,40 @@ function init_blockly_environment(argument=null) {
 
 
 function setup_blockly_workspace(workspace) {
-  // workspace.addChangeListener(Blockly.Events.disableOrphans);
+
+  // Восстановаить блоки из предыдущей сессии  
+  xml_text = load_xml()
+  if (xml_text)
+  {
+        var xml = Blockly.Xml.textToDom(xml_text);
+		Blockly.Xml.domToWorkspace(xml, workspace);
+		console.log("Blockly workspace restored.");
+  }
+
+  // сохраняем блоки в localStorage на случай внезапного закрытия страницы
+  var saveWorkspace_timer = null;
+  function saveWorkspaceOnChange(event) {
+  	if (event === null)  // вызов отложенный
+	{
+		var xml = Blockly.Xml.workspaceToDom(workspace); 
+		var xml_text = Blockly.Xml.domToText(xml);// compact form
+		save_xml(xml_text);
+		// console.log("Blockly workspace saved.");
+		return;  // вызов не отложенный
+	}
+
+	if (event.isUiEvent)
+		return;  // игнорируем неизменяющие события
+
+  	// подождать немного, пока соберутся все сопутствующие события, потом сохранить
+	if (saveWorkspace_timer !== null)
+		clearTimeout(saveWorkspace_timer);
+	saveWorkspace_timer = setTimeout(() => {
+		saveWorkspace_timer = null;
+		saveWorkspaceOnChange(null);
+	}, 500);
+  }
+	workspace.addChangeListener(saveWorkspaceOnChange);
 }
 
 
