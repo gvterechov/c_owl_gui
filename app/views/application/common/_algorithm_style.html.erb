@@ -7,7 +7,6 @@
 	  font-family: courier; 
 	  font-size: 10pt;
 	  line-height: 1.1;
-	  margin-left: 2em;
 	}
 
 
@@ -31,7 +30,16 @@
 
     /*Подчёркивание кнопки точками при наведениии на всю активную лексему (акцентирование внимания на кнопке)*/
     span:hover .alg_button {
-      border-bottom: 1px dotted black;
+      cursor: pointer;
+      border: 1px dotted black;
+      margin: -1px;
+    }
+    
+    .code-block {
+      border-left: 1px solid transparent;
+    }
+    .code-line:hover > .code-block {
+      border-left: 1px dotted green;
     }
 
 </style>
